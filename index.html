@@ -194,7 +194,6 @@
     <a href="#lead-gen"    class="nav-item active"><span class="nav-dot"></span>Lead Generation</a>
     <a href="#pr-media"    class="nav-item"><span class="nav-dot"></span>PR &amp; Media</a>
     <a href="#content"     class="nav-item"><span class="nav-dot"></span>Content Engine</a>
-    <a href="#exec-social" class="nav-item"><span class="nav-dot"></span>Executive Social</a>
     <a href="#li-ads"      class="nav-item"><span class="nav-dot"></span>LinkedIn Ads</a>
     <a href="#analytics"   class="nav-item"><span class="nav-dot"></span>Analytics</a>
     <a href="#brand"       class="nav-item"><span class="nav-dot"></span>Brand Projects</a>
@@ -361,43 +360,6 @@
       <div class="card-label" style="margin-bottom:4px;">Cornerstone Content · Quarterly Themes &amp; Production Steps</div>
       <div style="font-size:11px;color:var(--muted);margin-bottom:20px;">1 research piece or ebook per quarter</div>
       <div class="grid col-2" id="cornerstone-grid"></div>
-    </div>
-  </div>
-
-  <!-- KPI 4 — EXECUTIVE SOCIAL -->
-  <div class="section" id="exec-social">
-    <div class="section-header">
-      <div>
-        <div class="section-number">KPI 4</div>
-        <div class="section-title">Executive Social (LinkedIn)</div>
-        <div class="section-desc">Each Vertical Lead posts 8 times per month on LinkedIn — goal of 96 posts per person per year.</div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-top-line cyan"></div>
-      <div class="social-scroll">
-        <table class="social-table">
-          <thead>
-            <tr>
-              <th>Vertical Lead</th>
-              <th>Jan</th><th>Feb</th><th>Mar</th><th>Apr</th><th>May</th><th>Jun</th>
-              <th>Jul</th><th>Aug</th><th>Sep</th><th>Oct</th><th>Nov</th><th>Dec</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody id="social-tbody">
-            <tr><td colspan="14" style="color:var(--muted);text-align:center;padding:20px;">Loading…</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="legend">
-        <span>Posts vs. goal of 8/month:</span>
-        <span class="legend-item"><span class="legend-dot" style="background:rgba(0,200,120,0.3);border:1.5px solid #00c878;"></span>8 ✓ Full goal</span>
-        <span class="legend-item"><span class="legend-dot" style="background:rgba(19,201,232,0.2);border:1.5px solid var(--cyan);"></span>5–7 Good</span>
-        <span class="legend-item"><span class="legend-dot" style="background:rgba(253,113,26,0.15);border:1.5px solid var(--orange);"></span>1–4 Low</span>
-        <span class="legend-item"><span class="legend-dot" style="background:rgba(253,113,26,0.06);border:1.5px dashed rgba(253,113,26,0.4);"></span>0 Missed</span>
-        <span class="legend-item"><span class="legend-dot" style="background:transparent;border:1.5px dashed var(--dim);"></span>Future</span>
-      </div>
     </div>
   </div>
 
@@ -1071,9 +1033,6 @@ function initNav() {
 
     setMsg('Loading content tracker…');
     renderContentEngine(kpi, await fetchSheet('Content_Tracker'), yp);
-
-    setMsg('Loading executive social…');
-    renderSocialTable(await fetchSheet('Exec_Social'));
 
     setMsg('Loading LinkedIn ads…');
     renderLinkedInAds(await fetchSheet('LinkedIn_Ads'));
