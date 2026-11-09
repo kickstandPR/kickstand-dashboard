@@ -334,10 +334,10 @@
       <div>
         <div class="section-number">KPI 3</div>
         <div class="section-title">Content Engine</div>
-        <div class="section-desc">Weekly blog posts, 1 email newsletter per quarter, and 1 cornerstone research or ebook per quarter.</div>
+        <div class="section-desc">Weekly blog posts and 1 cornerstone research or ebook per quarter.</div>
       </div>
     </div>
-    <div class="grid col-2" style="margin-bottom:16px;">
+    <div class="grid" style="margin-bottom:16px;">
       <div class="card">
         <div class="card-top-line"></div>
         <div class="card-label">Blog Posts · Weekly</div>
@@ -354,13 +354,6 @@
           <div style="font-size:11px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:0.08em;">Upcoming from Content Tracker</div>
           <div id="blog-upcoming-list" style="font-size:12px;color:var(--text);line-height:1.9;"></div>
         </div>
-      </div>
-      <div class="card">
-        <div class="card-top-line cyan"></div>
-        <div class="card-label">Email Newsletter · Quarterly</div>
-        <div class="big-number" style="color:var(--cyan);" id="newsletter-big-num">— <span class="of">/ 4</span></div>
-        <div class="card-sub">1 per quarter</div>
-        <div class="milestone-list" id="newsletter-milestones"></div>
       </div>
     </div>
     <div class="card">
@@ -644,8 +637,6 @@ const CORNERSTONE_DEFAULTS = [
   { q:'Q4', theme:'CMO Pulse Update', created:false, blogged:false, social:false },
 ];
 
-// Newsletter completion status — update Q1→true when sent, etc.
-const NEWSLETTER_COMPLETE = [true, false, false, false]; // Q1, Q2, Q3, Q4
 
 // Vertical name overrides for LinkedIn Ads baseline section
 // Key = person name in sheet, Value = vertical label to display
@@ -802,20 +793,6 @@ function renderContentEngine(kpi, contentRows, yp) {
     ?blogs.map(r=>{const v=Object.values(r);return `→ ${v[2]||'—'} <span style="color:var(--muted);">${v[4]?`(${v[4]})`:''}</span>`;}).join('<br>')
     :'<span style="color:var(--dim);">No upcoming blog posts in tracker yet</span>';
 
-  // Newsletter
-  const newsRow=kpi.find(r=>String(Object.values(r)[0]||'').toLowerCase().includes('newsletter'));
-  const newsCount=newsRow?(Object.values(newsRow)[2]??0):0;
-  document.getElementById('newsletter-big-num').innerHTML=`${fmt(newsCount)} <span class="of">/ 4</span>`;
-  const newsletters=contentRows.filter(r=>String(Object.values(r)[0]||'').toLowerCase().includes('newsletter'));
-  document.getElementById('newsletter-milestones').innerHTML=['Q1','Q2','Q3','Q4'].map((q,i)=>{
-    // Use NEWSLETTER_COMPLETE as the authoritative source — not the sheet
-    const {label,cls,iconCls}=quarterStatus(i, NEWSLETTER_COMPLETE[i]);
-    return `<div class="milestone">
-      <div class="ms-icon ${iconCls}">${q}</div>
-      <div class="ms-text">${q} Newsletter<div class="ms-sub">Due by ${Q_DEADLINE_LABELS[i]}</div></div>
-      <span class="badge ${cls}">${label}</span>
-    </div>`;
-  }).join('');
 
   // Cornerstone — merge sheet data with defaults
   const cornerstones=contentRows.filter(r=>{const t=String(Object.values(r)[0]||'').toLowerCase();return t.includes('cornerstone')||t.includes('ebook')||t.includes('research');});
